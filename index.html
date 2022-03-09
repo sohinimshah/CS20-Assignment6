@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        body {
+            background-color: #cef2da;
+            font-family: Verdana, sans-serif;
+            text-align: center;
+        }
+    </style>
+    <head>
+        <meta charset="utf-8">
+        <title>Amicable Numbers</title>
+        <script language="javascript">
+            function isAmicable() {
+                var firstVal = document.getElementById("firstVal").value;
+                var secondVal = document.getElementById("secondVal").value;
+
+                var firstValFactors = createFactorsArray(firstVal);
+                var secondValFactors = createFactorsArray(secondVal);
+
+                var sumOfFirstValFactors = sumOfFactors(firstValFactors);
+                var sumOfSecondValFactors = sumOfFactors(secondValFactors);
+
+                var result;
+                if ((sumOfFirstValFactors == secondVal) && (sumOfSecondValFactors == firstVal)) {
+                    result = "The numbers: " + firstVal + " and " + secondVal + " are amicable.";
+                } else {
+                    result = "The numbers: " + firstVal + " and " + secondVal + " are not amicable.";
+                }
+                document.getElementById('printResult').innerHTML = result;
+
+                var factors = "Factors of " + firstVal + " are " + firstValFactors 
+                    + ".<br />Factors of " + secondVal + " are " + secondValFactors + ".";
+                document.getElementById('printFactors').innerHTML = factors;
+            }
+
+            function createFactorsArray(value) {
+                var factorsArr = [];
+                for (let i = 1; i <= value; i++) {
+                    if (isAFactor(i, value)) {
+                        factorsArr.push(i);
+                    }
+                }
+                return factorsArr;
+            }
+
+            function isAFactor(x, y) {
+                if (x != y) {
+                    if (y % x == 0) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+
+            function sumOfFactors(factorsArray) {
+                var sum = 0;
+                for (let i = 0; i < factorsArray.length; i++) {
+                    sum += factorsArray[i];
+                }
+                return sum;
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Amicable Numbers</h1>
+        <form>
+            <label for="firstVal">First Value:</label><br>
+            <input type="text" id="firstVal" name="firstVal" value="XXX"><br>
+            </br>
+            <label for="secondVal">Second Value:</label><br>
+            <input type="text" id="secondVal" name="secondVal" value="YYY"><br>
+            </br>
+            <button type="button" onclick="isAmicable()">Check if amicable</button>
+        </form>
+        </br>
+        <div id="printResult"></div>
+        <div id="printFactors"></div>
+    </body>
+</html>
